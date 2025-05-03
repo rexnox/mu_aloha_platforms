@@ -11,14 +11,14 @@ import uuid
 from io import StringIO
 from pathlib import Path
 
-## woa-msmnile patch start
+## aloha patch start
 SiliconName = "Msm8998"
 PlatformName = "Nazgul"
 PackageName = PlatformName+"Pkg"
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), 'PythonLibs'))
 import PostBuild
-## woa-msmnile patch end
+## aloha patch end
 
 from edk2toolext.environment import shell_environment
 from edk2toolext.environment.uefi_build import UefiBuilder
@@ -37,9 +37,9 @@ class CommonPlatform():
     ''' Common settings for this platform.  Define static data here and use
         for the different parts of stuart
     '''
-## woa-msmnile patch start
+## aloha patch start
     PackagesSupported = (PackageName,)
-## woa-msmnile patch end
+## aloha patch end
     ArchSupported = ("AARCH64",)
     TargetsSupported = ("DEBUG", "RELEASE", "NOOPT")
     Scopes = (PlatformName, 'gcc_aarch64_linux', 'edk2-build', 'cibuild', 'configdata')
@@ -54,9 +54,9 @@ class CommonPlatform():
         "Features/DFCI",
         "Features/CONFIG",
         "Binaries",
-## woa-msmnile patch start
+## aloha patch start
         "Silicon/QC/"+SiliconName
-## woa-msmnile patch end
+## aloha patch end
     )
 
 
@@ -146,12 +146,12 @@ class SettingsManager(UpdateSettingsManager, SetupSettingsManager, PrEvalSetting
 
         The tuple should be (<workspace relative path to dsc file>, <input dictionary of dsc key value pairs>)
         '''
-## woa-msmnile patch start
-        return (PackageName+"/"+PlatfromName+"NoSb.dsc", {})
+## aloha patch start
+        return (PackageName+"/"+PlatformName+"NoSb.dsc", {})
 
     def GetName(self):
         return PackageName
-## woa-msmnile patch end
+## aloha patch end
 
     def GetPackagesPath(self):
         ''' Return a list of paths that should be mapped as edk2 PackagesPath '''
@@ -196,7 +196,7 @@ class PlatformBuilder(UefiBuilder, BuildSettingsManager):
         ''' return tuple containing scopes that should be active for this process '''
         return CommonPlatform.Scopes
 
-## woa-msmnile patch start
+## aloha patch start
     def GetOutputDirectory(self):
         ''' Return the output directory for this platform '''
         return self.env.GetValue("OUTPUT_DIRECTORY")
@@ -214,14 +214,14 @@ class PlatformBuilder(UefiBuilder, BuildSettingsManager):
         linenum = target_device.find('-') + 1
         dtbname = target_device[(linenum):] + '.dtb'
         return dtbname
-## woa-msmnile patch end
+## aloha patch end
 
     def GetName(self):
         ''' Get the name of the repo, platform, or product being build '''
         ''' Used for naming the log file, among others '''
-## woa-msmnile patch start
+## aloha patch start
         return PackageName
-## woa-msmnile patch end
+## aloha patch end
 
     def GetLoggingLevel(self, loggerType):
         """Get the logging level depending on logger type.
@@ -244,10 +244,10 @@ class PlatformBuilder(UefiBuilder, BuildSettingsManager):
 
     def SetPlatformEnv(self):
         logging.debug("PlatformBuilder SetPlatformEnv")
-## woa-msmnile patch start
+## aloha patch start
         self.env.SetValue("PRODUCT_NAME", PlatformName, "Platform Hardcoded")
         self.env.SetValue("ACTIVE_PLATFORM", PackageName+"/"+PlatformName+"NoSb.dsc", "Platform Hardcoded")
-## woa-msmnile patch end
+## aloha patch end
         self.env.SetValue("TARGET_ARCH", "AARCH64", "Platform Hardcoded")
         self.env.SetValue("TOOL_CHAIN_TAG", "CLANGPDB", "set default to clangpdb")
         self.env.SetValue("EMPTY_DRIVE", "FALSE", "Default to false")
@@ -264,22 +264,22 @@ class PlatformBuilder(UefiBuilder, BuildSettingsManager):
         self.env.SetValue("CONF_AUTOGEN_INCLUDE_PATH", self.edk2path.GetAbsolutePathOnThisSystemFromEdk2RelativePath("Platforms", "AndromedaPkg", "Include"), "Platform Defined")
         self.env.SetValue("MU_SCHEMA_DIR", self.edk2path.GetAbsolutePathOnThisSystemFromEdk2RelativePath("Platforms", "AndromedaPkg", "CfgData"), "Platform Defined")
         self.env.SetValue("MU_SCHEMA_FILE_NAME", "AndromedaPkgCfgData.xml", "Platform Hardcoded")
-## woa-msmnile patch start
+## aloha patch start
         # Ship Device Name
         self.env.SetValue("BLD_*_TARGET_DEVICE", self.env.GetValue("TARGET_DEVICE"), "Default")
         # Ship DTB Name
         self.env.SetValue("BLD_*_FDT", self.GetDTBName(), "Default")
-## woa-msmnile patch end
+## aloha patch end
         return 0
 
     def PlatformPreBuild(self):
         return 0
 
     def PlatformPostBuild(self):
-## woa-msmnile patch start
+## aloha patch start
         logging.info("Building Android Boot Image.")
         PostBuild.makeAndroidImage(self.GetOutputBinDirectory(), self.GetOutputDirectory(), self.GetWorkspaceRoot(), self.env.GetValue("TARGET_DEVICE"), self.GetDTBName())
-## woa-msmnile patch end
+## aloha patch end
         return 0
 
     def FlashRomImage(self):
@@ -295,8 +295,8 @@ if __name__ == "__main__":
     print("Invoking Stuart")
     print("     ) _     _")
     print("    ( (^)-~-(^)")
-    print("__,-.\_( 0 0 )__,-.___")
-    print("  'W'   \   /   'W'")
+    print("__,-.\\_( 0 0 )__,-.___")
+    print("  'W'   \\   /   'W'")
     print("         >o<")
     SCRIPT_PATH = os.path.relpath(__file__)
     parser = argparse.ArgumentParser(add_help=False)
