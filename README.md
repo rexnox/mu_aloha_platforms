@@ -36,7 +36,7 @@ Please see https://Project-Aloha.github.io for some tutorials.
 - SSD
 - A linux environment capable of running below tool stack:
   - Bash
-  - Python 3.10 or higher (python3.10, python3.10-venv, python3.10-pip)
+  - Python 3.12 or higher (python3.12, python3.12-venv, python3.12-pip)
   - mono-devel
   - git-core, git
   - build-essential
@@ -57,7 +57,7 @@ pip install --upgrade -r pip-requirements.txt
 ./build_uefi.py --init
 ```
 
-*Alternatively, use docker if you don't have Ubuntu 22.04 environment*
+*Alternatively, use docker if you don't have Ubuntu 24.04 environment*
 
 ```
 sudo docker build -t mu:v1 .
