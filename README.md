@@ -54,6 +54,7 @@ Please see https://Project-Aloha.github.io for some tutorials.
 ```
 ./build_setup.sh
 pip install --upgrade -r pip-requirements.txt
+./build_uefi.py --init
 ```
 
 *Alternatively, use docker if you don't have Ubuntu 22.04 environment*
@@ -83,10 +84,11 @@ sudo docker run -v $(pwd):/build/ -it mu:v1
   ```
 
 - Tips:
-  - use `-p all` to build devices in all platforms.
-  - use `-d all -p <target-platform>` to build all devices in same platform.
+  - Use `-p all` to build devices in all platforms.
+  - Use `-d all -p <target-platform>` to build all devices in same platform.
+  - Use `-i` or `--init` to reinitialize build environment. Generally it's useful after a rebase update.
 
-- You will find Build/xxxxPkg/\<target-device\>.img after successfully building.
+- If the build is sucessful, the bootable artifact can be found at Build/xxxxPkg/\<target-device\>.img.
 
 ## Target list
 

@@ -327,6 +327,7 @@ if __name__ == '__main__':
 
     # Parse Args
     parser = argparse.ArgumentParser(description='Build Uefi for target device.')
+    parser.add_argument('--init', '-i', action='store_true', help="Initialize or reinitialize uefi build environment")
     parser.add_argument('-d', type=str, default=None, help="target device")
     parser.add_argument('-p', type=str, default=None, help="target platform")
     parser.add_argument('-s', type=int, default=None, help="secureboot status, should be 1 or 0")
@@ -336,6 +337,13 @@ if __name__ == '__main__':
     # Initial target object
     current_target = Target(args.d, args.p, None, None, None, args.s, args.t)
 
+    # Prepare Environment
+    # This never needs to be ran more than once, even for other packages usually
+    # All packages should reference the same amount of modules.
+    if args.init:
+        prepare_build(current_target.buildtype, "SurfaceDuo1Pkg")
+
+    # Fill target attributes
     destination_target = find_device_by_name(current_target.device) if (
             current_target.platform != "all" and current_target.device != "all") else current_target
     if type(destination_target) != Target:
@@ -345,11 +353,6 @@ if __name__ == '__main__':
     # Parse Config Files
     all_targets = []
     get_all_target(all_targets)
-
-    # Prepare Environment
-    # This never needs to be ran more than once, even for other packages usually
-    # All packages should reference the same amount of modules.
-    prepare_build(current_target.buildtype, "SurfaceDuo1Pkg")
 
     # Build all devices in one platform
     if current_target.platform == "all":
