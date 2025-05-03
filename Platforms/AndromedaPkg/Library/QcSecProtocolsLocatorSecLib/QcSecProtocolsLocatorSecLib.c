@@ -40,6 +40,10 @@ EFI_STATUS FindTeAddr(TE_INFO_STRUCT *TEInfo)
   for (UINT64 SecurityCoreAddress = (UINT64)PreFD.Address;
        SecurityCoreAddress < MaxAddressForFDRegion; SecurityCoreAddress += 4) {
     if (*(UINT32 *)(SecurityCoreAddress) == 0xAA645A56) {
+      // Got size info
+      TEInfo->fileSize = 0xFFFFFF & *(UINT32 *)(SecurityCoreAddress-4); // Top 1 Byte is 0x12, the reset part is TE size.
+      TEInfo->teSize = TEInfo->fileSize - sizeof(EFI_TE_IMAGE_HEADER);
+
       // Reach end of header
       UINT64 EndOfHeaderAddress =
           SecurityCoreAddress + sizeof(EFI_TE_IMAGE_HEADER) +
@@ -87,6 +91,24 @@ exitLoop:
        TEInfo->teHeader->StrippedSize, TEInfo->teHeader->AddressOfEntryPoint,
        TEInfo->teHeader->BaseOfCode, TEInfo->teHeader->ImageBase,
        TEInfo->programBuffer - TEInfo->TEBuffer));
+
+  DEBUG(
+      (DEBUG_WARN,
+    "TE File Size              0x%08X\n"
+    "TE Size                   0x%08X\n",
+    TEInfo->fileSize,
+    TEInfo->teSize));
+
+  // Memory dump for debugging
+  UINTN end = PreFD.Address + 0x3000;
+  for (UINTN address = PreFD.Address; address < end; address++) {
+    if(address%0x20 == 0){
+        DEBUG((EFI_D_WARN, "\n0x%llX: %02X", address, *(UINT8*)address));
+    }
+    else{
+      DEBUG((EFI_D_WARN, " %02X", *(UINT8*)address));
+    }
+  }
 #endif
 
 exit:
