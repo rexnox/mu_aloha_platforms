@@ -18,7 +18,7 @@ jobs:
   # This workflow contains two jobs called "setup" and "build"
   setup:
     # The type of runner that the job will run on
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     outputs:
       matrix: ${{ steps.matrix.outputs.value }}
