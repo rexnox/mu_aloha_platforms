@@ -8,11 +8,10 @@ echo CI Environment Setup.
 # Install Dependence
 #apt -y remove firefox # uninstall firefox before upgradeing.
 ./build_setup.sh
-
-# Initialize mu uefi build env
-./build_uefi.py --init
-
 pip install --upgrade -r pip-requirements.txt
+
 #source SurfaceDuo/bin/activate
 git config --global --add safe.directory '*'
 
+# Initialize mu uefi build env
+./build_uefi.py --init
