@@ -67,7 +67,7 @@ def is_system_supported():
 
 
 def build_bootshim(this_target):
-    bootshim_cmd = os.path.abspath("build_boot_shim.sh") + " -a " + str(this_target.bootshim_uefi_base) + " -b " + str(
+    bootshim_cmd = os.path.abspath("build_boot_shim.sh") + " -b " + str(this_target.bootshim_uefi_base) + " -s " + str(
         this_target.bootshim_uefi_size)
     return os.system(bootshim_cmd)
 

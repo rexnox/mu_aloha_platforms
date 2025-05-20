@@ -1,24 +1,32 @@
 #!/bin/bash
+# Usage:
+#  build_boot_shim.sh -b base_address -s size
 
 # Get args
-while getopts "a:b:p" opt; do
+while getopts "b:s:" opt; do
     case ${opt} in
-        a) BASE=${OPTARG};;
-        b) SIZE=${OPTARG};;
-        p) SIZE_PADDING=${OPTARG};;
+        b) BASE=${OPTARG};;
+        s) SIZE=${OPTARG};;
+        :)
+            echo "Option -$OPTARG requires an argument." >&2
+            exit 1
+            ;;
     esac
 done
-echo ${BASE} ${SIZE} ${SIZE_PADDING}
-if [ -z ${SIZE_PADDING} ] ;then
-    SIZE_PADDING=0
-fi
+
+echo "Building bootshim:"
 
 if [ -z ${BASE} ] || [ -z ${SIZE} ] ;then
-    BASE=0x9FC00000
-    SIZE=0x00300000
+    echo -e "\t\033[31;3;1mParameters not found!\033[0m"
+    echo -e "Usage:"
+    echo -e "\tbuild_boot_shim.sh -b base_address -s size"
+    exit
 fi
+
+echo -e "\tUEFI BASE: ${BASE}"
+echo -e "\tUEFI_SIZE: ${SIZE}"
 
 cd BootShim
 rm BootShim.elf BootShim.bin
-make UEFI_BASE=${BASE} UEFI_SIZE=${SIZE} PADDING_SIZE=${SIZE_PADDING}
+make UEFI_BASE=${BASE} UEFI_SIZE=${SIZE}
 cd ..
