@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/bin/env python3
 
 # @file
 # This script help you build any devices in any platforms in this repo.
