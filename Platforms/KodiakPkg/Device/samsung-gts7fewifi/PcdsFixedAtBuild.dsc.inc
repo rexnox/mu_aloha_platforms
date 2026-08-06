@@ -5,7 +5,7 @@ gAndromedaPkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2560
 # Smbios Info
 gAndromedaPkgTokenSpaceGuid.PcdSmbiosSystemBrand|"Samsung"
 gAndromedaPkgTokenSpaceGuid.PcdSmbiosSystemModel|"Galaxy Tab S7 FE"
-gAndromedaPkgTokenSpaceGuid.PcdSmbiosSystemRetailModel|"gts7fewifi"
+gAndromedaPkgTokenSpaceGuid.PcdSmbiosSystemRetailModel|"gts7fewifi-T733XXS9DYF1"
 gAndromedaPkgTokenSpaceGuid.PcdSmbiosSystemRetailSku|"SM-T733"
 
 gAndromedaPkgTokenSpaceGuid.PcdABLProduct|"gts7fewifi"
