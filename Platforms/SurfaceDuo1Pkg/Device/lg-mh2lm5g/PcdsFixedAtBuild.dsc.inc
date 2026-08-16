@@ -10,5 +10,5 @@ gAndromedaPkgTokenSpaceGuid.PcdSmbiosSystemRetailSku|"LM-V510"
 
 gAndromedaPkgTokenSpaceGuid.PcdABLProduct|"LGE V50S ThinQ"
 
-# Storage
-gAndromedaPkgTokenSpaceGuid.PcdStorageHasUFS3|0
+gAndromedaPkgTokenSpaceGuid.PcdMLVMBase|0xA0000000
+

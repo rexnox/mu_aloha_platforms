@@ -15,9 +15,6 @@ from pathlib import Path
 SiliconName = "Sm8450"
 PlatformName = "Waipio"
 PackageName = PlatformName+"Pkg"
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), 'PythonLibs'))
-import PostBuild
 ## aloha patch end
 
 from edk2toolext.environment import shell_environment
@@ -48,9 +45,7 @@ class CommonPlatform():
         "Platforms",
         "MU_BASECORE",
         "Common/MU",
-        "Common/MU_TIANO",
         "Common/MU_OEM_SAMPLE",
-        "Silicon/Arm/MU_TIANO",
         "Features/DFCI",
         "Features/CONFIG",
         "Binaries",
@@ -87,14 +82,13 @@ class SettingsManager(UpdateSettingsManager, SetupSettingsManager, PrEvalSetting
         return [
             RequiredSubmodule("Binaries", True),
             RequiredSubmodule("Common/MU_OEM_SAMPLE", True),
-            RequiredSubmodule("Common/MU_TIANO", True),
             RequiredSubmodule("Common/MU", True),
             RequiredSubmodule("Features/CONFIG", True),
             RequiredSubmodule("Features/DFCI", True),
             RequiredSubmodule("MU_BASECORE", True),
             RequiredSubmodule("Platforms/OpensslPkg/Library/OpensslLib/openssl", True),
+            RequiredSubmodule("Platforms/MbedTlsPkg/Library/MbedTlsLib/mbedtls", True),
             RequiredSubmodule("Platforms/SurfaceDuoACPI", True),
-            RequiredSubmodule("Silicon/Arm/MU_TIANO", True),
 ## aloha patch start
             RequiredSubmodule("Platforms/CranePkg", True),
 ## aloha patch end
@@ -280,8 +274,21 @@ class PlatformBuilder(UefiBuilder, BuildSettingsManager):
 
     def PlatformPostBuild(self):
 ## aloha patch start
+        import sys
+        import importlib
         logging.info("Building Android Boot Image.")
-        PostBuild.makeAndroidImage(self.GetOutputBinDirectory(), self.GetOutputDirectory(), self.GetWorkspaceRoot(), self.env.GetValue("TARGET_DEVICE"), self.GetDTBName())
+        sys.path.append(os.path.join(self.GetWorkspaceRoot(), 'PythonLibs'))
+        BootImage = getattr(importlib.import_module("PostBuild"), "Bootimg")
+        bootimg =  BootImage(
+            self.GetOutputBinDirectory(),
+            self.GetOutputDirectory(),
+            self.GetWorkspaceRoot(),
+            self.env.GetValue("TARGET_DEVICE"),
+            self.GetDTBName(),
+            self.GetName(),
+            SiliconName
+        )
+        bootimg.makeAndroidImage()
 ## aloha patch end
         return 0
 

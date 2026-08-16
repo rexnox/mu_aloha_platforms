@@ -88,7 +88,7 @@ sudo docker run -v $(pwd):/build/ -it mu:v1
   - Use `-d all -p <target-platform>` to build all devices in same platform.
   - Use `-i` or `--init` to reinitialize build environment. Generally it's useful after a rebase update.
 
-- If the build is sucessful, the bootable artifact can be found at Build/xxxxPkg/\<target-device\>.img.
+- If the build is successful, the bootable artifact can be found at Build/xxxxPkg/\<target-device\>.img.
 
 ## Target list
 
@@ -99,12 +99,6 @@ sudo docker run -v $(pwd):/build/ -it mu:v1
 | Device                               | Target name            | DSDT Support    | Contributors                                       |
 |--------------------------------------|------------------------|-----------------|----------------------------------------------------|
 | OnePlus 5T                           | oneplus-dumpling       | ✅              | [qaz6750](https://github.com/qaz6750)              |
-
-#### Xiaomi Devices
-
-| Device                               | Target name            | DSDT Support    | Contributors                                       |
-|--------------------------------------|------------------------|-----------------|----------------------------------------------------|
-| Xiaomi 6                             | Xiaomi-sagit           | ✅              | [qaz6750](https://github.com/qaz6750)              |
 
 ### Snapdragon 845/850 (*SDM845*)
 
@@ -243,13 +237,7 @@ sudo docker run -v $(pwd):/build/ -it mu:v1
 
 | Device                               | Target name            | DSDT Support    | Contributors                                       |
 |--------------------------------------|------------------------|-----------------|----------------------------------------------------|
-| Galaxy Z Fold 3 5G                   | samsung-q2q            | ✅              | None                                               |
-
-#### ZTE Devices
-
-| Device                               | Target name            | DSDT Support    | Contributors                                       |
-|--------------------------------------|------------------------|-----------------|----------------------------------------------------|
-| ZTE A31 Pro                          | zte-p875a02            | ✅              | None                                               |
+| Galaxy Z Fold 3 5G                   | samsung-q2q            | ✅              | None                                               |                                        |
 
 #### Xiaomi Devices
 
@@ -280,9 +268,9 @@ sudo docker run -v $(pwd):/build/ -it mu:v1
 | Device                               | Target name            | DSDT Support    | Maintainers                                        |
 |--------------------------------------|------------------------|-----------------|----------------------------------------------------|
 | Qualcomm Technologies, Inc. QRD 8550 | qcom-qrd8550           | ❌              | None                                               |
+| Qualcomm Technologies, Inc. MTP 8550 | qcom-mtp8550           | ❌              | None                                               |
 
 #### AYANEO Devices
-
 | Device                               | Target name            | DSDT Support    | Contributors                                       |
 |--------------------------------------|------------------------|-----------------|----------------------------------------------------|
 | AYANEO Pocket S                      | ayaneo-aps             | ❌              | None                                               |
@@ -308,8 +296,6 @@ sudo docker run -v $(pwd):/build/ -it mu:v1
 
 | Device                               | Target name            | DSDT Support    | Contributors                                       |
 |--------------------------------------|------------------------|-----------------|----------------------------------------------------|
-| Xiaomi 13                            | xiaomi-fuxi            | ❌              | None                                               |
-| Xiaomi 13 Pro                        | xiaomi-nuwa            | ❌              | None                                               |
 | Xiaomi Pad6 S Pro                    | xiaomi-sheng           | ❌              | None                                               |
 | Xiaomi K60 Pro                       | xiaomi-socrates        | ❌              | None                                               |
 

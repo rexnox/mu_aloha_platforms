@@ -32,7 +32,6 @@
   UefiBootServicesTableLib
   UefiLib
   AslUpdateLib
-  RFSProtectionLib
   MemoryMapHelperLib
 
 [Protocols]
@@ -42,4 +41,3 @@
 
 [FixedPcd]
   gArmPlatformTokenSpaceGuid.PcdClusterCount
-  gAndromedaPkgTokenSpaceGuid.PcdStorageHasUFS3

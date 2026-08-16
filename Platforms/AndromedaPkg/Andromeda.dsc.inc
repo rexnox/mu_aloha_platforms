@@ -32,8 +32,8 @@
 
 [PcdsFixedAtBuild.common]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor|L"DuoWoA authors"
-  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"2412.74"
-  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareRevision|0x01241274
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"2607.3"
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareRevision|0x0126073
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId|"QCOM  "
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId|0x324B44454D4F4351
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorId|0x4D4F4351
@@ -48,8 +48,8 @@
 
 !if $(TARGET) == DEBUG
   gEfiMdePkgTokenSpaceGuid.PcdDebugClearMemoryValue|0xAF
-  gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask|0x0f
-  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x800fee0f
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask|0x2f
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x8007ee0f
   gEfiMdePkgTokenSpaceGuid.PcdPerformanceLibraryPropertyMask|1
   gEfiMdePkgTokenSpaceGuid.PcdPostCodePropertyMask|0
   gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask|0x07
@@ -100,10 +100,6 @@
   # a PCD that controls the enumeration and connection of ConIn's. When true, ConIn is only connected once a console input is requests
   gEfiMdeModulePkgTokenSpaceGuid.PcdConInConnectOnDemand|FALSE
 
-  # Enable SHELL to build instead of just taking the binary
-  gEfiMdePkgTokenSpaceGuid.PcdUefiLibMaxPrintBufferSize|16000
-  gEfiShellPkgTokenSpaceGuid.PcdShellProfileMask|0x1f    # All profiles
-
   gMsGraphicsPkgTokenSpaceGuid.PcdUiThemeInDxe|TRUE
   gEfiMdeModulePkgTokenSpaceGuid.PcdBootManagerInBootOrder|TRUE
 
@@ -111,8 +107,8 @@
   # 4042708A-0F2D-4823-AC60-0D77B3111889
   gEfiMdeModulePkgTokenSpaceGuid.PcdBootManagerMenuFile|{ 0x8A, 0x70, 0x42, 0x40, 0x2D, 0x0F, 0x23, 0x48, 0xAC, 0x60, 0x0D, 0x77, 0xB3, 0x11, 0x18, 0x89 }
 
-  gOemPkgTokenSpaceGuid.PcdUefiVersionNumber|0x1241274 # 1.24.12.74
-  gOemPkgTokenSpaceGuid.PcdUefiBuildDate|0x20241223 # 2024-12-23
+  gOemPkgTokenSpaceGuid.PcdUefiVersionNumber|0x126073 # 1.26.07.3
+  gOemPkgTokenSpaceGuid.PcdUefiBuildDate|0x20260701 # 2026-07-01
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxVariableSize|0x2000
 
@@ -232,7 +228,7 @@
   DebugAgentTimerLib|EmbeddedPkg/Library/DebugAgentTimerLibNull/DebugAgentTimerLibNull.inf
 
   # Flattened Device Tree (FDT) access library
-  FdtLib|EmbeddedPkg/Library/FdtLib/FdtLib.inf
+  FdtLib|MdePkg/Library/BaseFdtLib/BaseFdtLib.inf
 
   # USB Libraries
   UefiUsbLib|MdePkg/Library/UefiUsbLib/UefiUsbLib.inf
@@ -274,7 +270,7 @@
 
   # Base ARM libraries
   ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf
-  ArmMmuLib|ArmPkg/Library/ArmMmuLib/ArmMmuBaseLib.inf
+  ArmMmuLib|UefiCpuPkg/Library/ArmMmuLib/ArmMmuBaseLib.inf
 
   ArmPlatformLib|AndromedaPkg/Library/ArmPlatformLib/ArmPlatformLib.inf
 
@@ -293,7 +289,6 @@
   SecurityLockAuditLib|MdeModulePkg/Library/SecurityLockAuditDebugMessageLib/SecurityLockAuditDebugMessageLib.inf
   ResetUtilityLib|MdeModulePkg/Library/ResetUtilityLib/ResetUtilityLib.inf
   HwResetSystemLib|ArmPkg/Library/ArmPsciResetSystemLib/ArmPsciResetSystemLib.inf
-  FltUsedLib|MdePkg/Library/FltUsedLib/FltUsedLib.inf
   ResetSystemLib|ArmPkg/Library/ArmPsciResetSystemLib/ArmPsciResetSystemLib.inf
 
   # UI and graphics
@@ -324,13 +319,10 @@
 
   PrePiHobListPointerLib|ArmPlatformPkg/Library/PrePiHobListPointerLib/PrePiHobListPointerLib.inf
 
-  BaseSynchronizationLib|MdePkg/Library/BaseSynchronizationLib/BaseSynchronizationLib.inf
   CompilerIntrinsicsLib|MdePkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
-  UefiDevicePathLib|MdePkg/Library/UefiDevicePathLib/UefiDevicePathLib.inf
   UefiScsiLib|MdePkg/Library/UefiScsiLib/UefiScsiLib.inf
 
   CapsulePersistLib|MdeModulePkg/Library/CapsulePersistLibNull/CapsulePersistLibNull.inf      ## MU_CHANGE
-  LzmaDecompressLib|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
   OemHookStatusCodeLib|MdeModulePkg/Library/OemHookStatusCodeLibNull/OemHookStatusCodeLibNull.inf
   PcdDatabaseLoaderLib|MdeModulePkg/Library/PcdDatabaseLoaderLib/Dxe/PcdDatabaseLoaderLibDxe.inf
 
@@ -345,7 +337,6 @@
   DtPlatformDtbLoaderLib|EmbeddedPkg/Library/DxeDtPlatformDtbLoaderLibDefault/DxeDtPlatformDtbLoaderLibDefault.inf
   ExtractGuidedSectionLib|EmbeddedPkg/Library/PrePiExtractGuidedSectionLib/PrePiExtractGuidedSectionLib.inf
   PrePiLib|EmbeddedPkg/Library/PrePiLib/PrePiLib.inf
-  PrePiMemoryAllocationLib|EmbeddedPkg/Library/PrePiMemoryAllocationLib/PrePiMemoryAllocationLib.inf
 
   FmpAuthenticationLib|SecurityPkg/Library/FmpAuthenticationLibPkcs7/FmpAuthenticationLibPkcs7.inf
 
@@ -377,27 +368,27 @@
   UnitTestPersistenceLib|UnitTestFrameworkPkg/Library/UnitTestPersistenceLibNull/UnitTestPersistenceLibNull.inf
   UnitTestResultReportLib|UnitTestFrameworkPkg/Library/UnitTestResultReportLib/UnitTestResultReportLibDebugLib.inf
 
+  UfsInfoLib|AndromedaPkg/Library/UfsInfoLib/UfsInfoLib.inf
+
   PolicyLib|PolicyServicePkg/Library/DxePolicyLib/DxePolicyLib.inf
 
   PanicLib|MdePkg/Library/BasePanicLibNull/BasePanicLibNull.inf  # MU_CHANGE
   
   ConsoleMsgLib|PcBdsPkg/Library/ConsoleMsgLibNull/ConsoleMsgLibNull.inf
 
-[LibraryClasses.common.PEIM, LibraryClasses.common.PEI_CORE, LibraryClasses.common.SEC]
-  ArmMmuLib|ArmPkg/Library/ArmMmuLib/ArmMmuPeiLib.inf
+[LibraryClasses.common.PEIM, LibraryClasses.common.PEI_CORE]
+  ArmMmuLib|UefiCpuPkg/Library/ArmMmuLib/ArmMmuPeiLib.inf
 
 [LibraryClasses.common.SEC]
   HobLib|EmbeddedPkg/Library/PrePiHobLib/PrePiHobLib.inf
   MemoryAllocationLib|EmbeddedPkg/Library/PrePiMemoryAllocationLib/PrePiMemoryAllocationLib.inf
   PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
   PrePiHobListPointerLib|ArmPlatformPkg/Library/PrePiHobListPointerLib/PrePiHobListPointerLib.inf
-  PrePiMemoryAllocationLib|EmbeddedPkg/Library/PrePiMemoryAllocationLib/PrePiMemoryAllocationLib.inf
-  ArmMmuLib|ArmPkg/Library/ArmMmuLib/ArmMmuPeiLib.inf
   MemoryMapHelperLib|AndromedaPkg/Library/MemoryMapHelperSecLib/MemoryMapHelperSecLib.inf
   ConfigurationMapHelperLib|AndromedaPkg/Library/ConfigurationMapHelperSecLib/ConfigurationMapHelperSecLib.inf
   SmemSecLib|AndromedaPkg/Library/SmemSecLib/SmemSecLib.inf
 ## Patch: A finder lib to get protocol address
-  SecProtocolFinderLib|AndromedaPkg/Library/QcSecProtocolsLocatorSecLib/QcSecProtocolsLocatorSecLib.inf
+  SecProtocolFinderLib|AndromedaPkg/Library/SecProtocolFinderLib/SecProtocolFinderLib.inf
 ##
 
 [LibraryClasses.common.DXE_CORE]
@@ -561,22 +552,18 @@
   # Fake Variable Services
   MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf {
     <LibraryClasses>
-      BaseCryptLib|OpensslPkg/Library/BaseCryptLib/RuntimeCryptLib.inf
-      TlsLib|OpensslPkg/Library/TlsLib/TlsLib.inf
+      BaseCryptLib|MbedTlsPkg/Library/BaseCryptLib/RuntimeCryptLib.inf
       IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
-## Patch: Fix memset redefine issue while linking, only implement while screen serial is enabled.
-!if $(USE_SCREEN_FOR_SERIAL_OUTPUT) == 1
-      CompilerIntrinsicsLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
-!endif
-## End patch
-      OpensslLib|OpensslPkg/Library/OpensslLib/OpensslLib.inf # Contains openSSL library used by BaseCryptoLib
+      MbedTlsLib|MbedTlsPkg/Library/MbedTlsLib/MbedTlsLib.inf
+      OpensslLib|OpensslPkg/Library/OpensslLib/OpensslLib.inf # Contains openSSL library used by MbedTlsLib
+      TlsLib|OpensslPkg/Library/TlsLib/TlsLib.inf
   }
 
   MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
 
   MsCorePkg/CheckHardwareConnected/CheckHardwareConnected.inf
   MsCorePkg/MuVarPolicyFoundationDxe/MuVarPolicyFoundationDxe.inf {
-    <PcdsFixedAtBuild.common>
+    <PcdsFixedAtBuild>
       gEfiMdePkgTokenSpaceGuid.PcdDebugClearMemoryValue|0x00
       gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask|0x00
       gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x00000000
@@ -626,7 +613,10 @@
   AndromedaPkg/Driver/SmBiosTableDxe/SmBiosTableDxe.inf
 
   # PrePI
-  AndromedaPkg/PrePi/PeiUniCore.inf
+  AndromedaPkg/PrePi/PeiUniCore.inf {
+		<LibraryClasses>
+      NULL|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
+  }
 
   AndromedaPkg/UFP/ufpdevicefw.inf
 
@@ -645,7 +635,7 @@
 			PerformanceLib|MdeModulePkg/Library/DxePerformanceLib/DxePerformanceLib.inf
 			DebugPrintErrorLevelLib|MdePkg/Library/BaseDebugPrintErrorLevelLib/BaseDebugPrintErrorLevelLib.inf
 
-			FdtLib|EmbeddedPkg/Library/FdtLib/FdtLib.inf
+      FdtLib|MdePkg/Library/BaseFdtLib/BaseFdtLib.inf
 			LibUfdt|QcomModulePkg/Library/LibUfdt/LibUfdt.inf
 			ArmSmcLib|MdePkg/Library/ArmSmcLib/ArmSmcLib.inf
 			BootLib|QcomModulePkg/Library/BootLib/BootLib.inf

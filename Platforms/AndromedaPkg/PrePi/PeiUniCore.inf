@@ -41,7 +41,6 @@
   TimerLib
   SerialPortLib
   ExtractGuidedSectionLib
-  LzmaDecompressLib
   DebugAgentLib
   PrePiLib
   ArmPlatformLib
@@ -73,8 +72,6 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString
 
 [FixedPcd]
-  gArmTokenSpaceGuid.PcdVFPEnabled
-
   gArmTokenSpaceGuid.PcdFdBaseAddress
   gArmTokenSpaceGuid.PcdFdSize
 

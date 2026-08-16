@@ -13,9 +13,11 @@
 [FixedPcd]
   gArmTokenSpaceGuid.PcdSystemMemoryBase
   gArmTokenSpaceGuid.PcdSystemMemorySize
+  gAndromedaPkgTokenSpaceGuid.PcdMLVMBase
 
 [Packages]
   ArmPkg/ArmPkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
   ArmPlatformPkg/ArmPlatformPkg.dec
   MdePkg/MdePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
@@ -43,11 +45,9 @@
 
 [Protocols]
   gEfiRamPartitionProtocolGuid
-  gArmPageTableMemoryAllocationProtocolGuid
   
 [Depex]
-  gEfiRamPartitionProtocolGuid AND
-  gArmPageTableMemoryAllocationProtocolGuid
+  gEfiRamPartitionProtocolGuid
 
 #[BuildOptions.AARCH64]
 #  GCC:*_*_*_CC_FLAGS = -Wno-unused-function
