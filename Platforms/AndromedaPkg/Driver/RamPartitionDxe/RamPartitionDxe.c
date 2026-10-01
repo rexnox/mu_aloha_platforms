@@ -236,10 +236,10 @@ RamPartitionDxeInitialize(
         (EFI_D_INFO, "AvailableLength: 0x%016lx \n",
          RamPartitionEntries[i].AvailableLength));
 
-    // Update the first MLVM region for 855 Platform if MLVM is not 0.
-    if ((FixedPcdGet64(PcdMLVMBase) != 0) && (RamPartitionEntries[i].Base == GENERIC_RAM_BASE)) {
+    // Update the first low DDR region.
+    if (RamPartitionEntries[i].Base == GENERIC_RAM_BASE) {
       MemoryDescriptorEx[0].Length =
-          RamPartitionEntries[i].AvailableLength + GENERIC_RAM_BASE - FixedPcdGet64(PcdMLVMBase);
+          RamPartitionEntries[i].AvailableLength + GENERIC_RAM_BASE - MemoryDescriptorEx[0].Address;
       SpiltAndAddRamPartitions(
           MemoryDescriptorEx[0].Address, MemoryDescriptorEx[0].Length,
           MemoryDescriptorEx[0].ArmAttributes,
